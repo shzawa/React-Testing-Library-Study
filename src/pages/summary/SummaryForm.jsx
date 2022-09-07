@@ -1,19 +1,38 @@
 import { useState } from 'react';
+import { Button, Form, Popover, OverlayTrigger } from 'react-bootstrap';
 
 const SummaryForm = () => {
-  const [disabled, setDisabled] = useState(true);
+  const [tcChecked, setTcChecked] = useState(false);
+
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Body>No ice cream will actually be delivered</Popover.Body>
+    </Popover>
+  );
+
+  const checkboxLabel = (
+    <span>
+      I agree to
+      <OverlayTrigger trigger="hover" placement="right" overlay={popover}>
+        <span style={{ color: 'blue' }}>Terms and Conditions</span>
+      </OverlayTrigger>
+    </span>
+  );
 
   return (
-    <div>
-      <input
-        type="checkbox"
-        id="disable-button-checkbox"
-        aria-checked={disabled}
-        onChange={() => setDisabled((disabled) => !disabled)}
-      />
-      <label htmlFor="disable-button-checkbox">利用規約に同意しました</label>
-      <button disabled={disabled}>注文する</button>
-    </div>
+    <Form>
+      <Form.Group controlId="terms-and-conditions">
+        <Form.Check
+          type="checkbox"
+          checked={tcChecked}
+          onChange={(e) => setTcChecked(e.target.checked)}
+          label={checkboxLabel}
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit" disabled={!tcChecked}>
+        Confirm order
+      </Button>
+    </Form>
   );
 };
 
