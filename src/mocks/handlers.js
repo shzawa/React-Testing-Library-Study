@@ -1,6 +1,5 @@
 import { rest } from 'msw';
-
-const apiOrigin = process.env.REACT_APP_API_ORIGIN || 'http://localhost:3030';
+import { apiOrigin } from '../constant';
 
 const handlers = [
   rest.get(`${apiOrigin}/scoops`, (req, res, ctx) => {
