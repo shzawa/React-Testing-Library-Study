@@ -3,5 +3,5 @@ export const apiOrigin =
 
 export const pricePerItem = {
   scoops: 2,
-  toppings: 1,
+  toppings: 1.5,
 };

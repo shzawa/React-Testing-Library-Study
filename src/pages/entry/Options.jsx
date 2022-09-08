@@ -4,7 +4,7 @@ import { Row } from 'react-bootstrap';
 import ScoopOption from './ScoopOption';
 import ToppingOption from './ToppingOption';
 import AlertBanner from '../common/AlertBanner';
-import { pricePerItem } from '../../constant';
+import { apiOrigin, pricePerItem } from '../../constant';
 import { useOrderDetails } from '../../context/OrderDetails';
 
 const Options = ({ optionType }) => {
@@ -14,7 +14,7 @@ const Options = ({ optionType }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3030/${optionType}`)
+      .get(`${apiOrigin}/${optionType}`)
       .then((response) => {
         setItems(response.data);
       })
