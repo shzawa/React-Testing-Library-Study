@@ -1,10 +1,10 @@
+import SummaryForm from './SummaryForm';
+import userEvent from '@testing-library/user-event';
 import {
   render,
   screen,
   waitForElementToBeRemoved,
-} from '@testing-library/react';
-import SummaryForm from './SummaryForm';
-import userEvent from '@testing-library/user-event';
+} from '../../test-utils/testing-library-utils';
 
 test('初回描画時', () => {
   render(<SummaryForm />);
