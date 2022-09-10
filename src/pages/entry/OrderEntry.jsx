@@ -1,7 +1,8 @@
+import { Button } from 'react-bootstrap';
 import { useOrderDetails } from '../../context/OrderDetails';
 import Options from './Options';
 
-const OrderEntry = () => {
+const OrderEntry = ({ goToNextPage }) => {
   const [orderDetails] = useOrderDetails();
 
   return (
@@ -10,6 +11,7 @@ const OrderEntry = () => {
       <Options optionType="scoops" />
       <Options optionType="toppings" />
       <h2>Grand total: {orderDetails.totals.grandTotal}</h2>
+      <Button onClick={goToNextPage}>Order Sundae!</Button>
     </div>
   );
 };

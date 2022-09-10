@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { Button, Form, Popover, OverlayTrigger } from 'react-bootstrap';
 
-const SummaryForm = () => {
+const SummaryForm = ({ goToNextPage }) => {
   const [tcChecked, setTcChecked] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    goToNextPage();
+  };
 
   const popover = (
     <Popover id="popover-basic">
@@ -12,7 +17,7 @@ const SummaryForm = () => {
 
   const checkboxLabel = (
     <span>
-      I agree to
+      I agree to{' '}
       <OverlayTrigger
         trigger={['hover', 'focus']}
         placement="right"
@@ -24,7 +29,7 @@ const SummaryForm = () => {
   );
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group controlId="terms-and-conditions">
         <Form.Check
           type="checkbox"

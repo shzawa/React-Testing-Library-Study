@@ -28,5 +28,8 @@ const handlers = [
       ])
     );
   }),
+  rest.post(`${apiOrigin}/order`, (req, res, ctx) => {
+    return res(ctx.status(201), ctx.json({ orderNumber: 6235006122 }));
+  }),
 ];
 export default handlers;
