@@ -69,3 +69,24 @@ test('order phases for happy path', async () => {
   await screen.findByRole('spinbutton', { name: 'Vanilla' });
   await screen.findByRole('checkbox', { name: 'Cherries' });
 });
+
+test('Toppings header is not on summary page if no toppings ordered', async () => {
+  render(<App />);
+
+  // アイスクリームとトッピングを追加する
+  const vanillaInput = await screen.findByRole('spinbutton', {
+    name: 'Vanilla',
+  });
+  userEvent.clear(vanillaInput);
+  userEvent.type(vanillaInput, '1');
+
+  // 注文ボタンをクリック -> 注文確認画面に切り替え
+  const orderButton = screen.getByRole('button', { name: /order sundae/i });
+  userEvent.click(orderButton);
+
+  // toppings が未選択なため、項目ごと非表示になっている
+  const notToppings = screen.queryByRole('heading', {
+    name: /toppings/i,
+  });
+  expect(notToppings).not.toBeInTheDocument();
+});

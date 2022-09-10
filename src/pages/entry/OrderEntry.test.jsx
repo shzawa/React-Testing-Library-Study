@@ -10,7 +10,7 @@ test('handles error for scoops and toppings routes', async () => {
     rest.get(`${apiOrigin}/toppings`, (req, res, ctx) => res(ctx.status(500)))
   );
 
-  render(<OrderEntry />);
+  render(<OrderEntry goToNextPage={jest.fn()} />);
 
   const alerts = await screen.findAllByRole('alert');
   expect(alerts).toHaveLength(2);
