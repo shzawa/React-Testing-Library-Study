@@ -29,15 +29,23 @@ test('order phases for happy path', async () => {
   });
   userEvent.click(tcCheckbox);
 
-  const confirmOrderButton = screen.getByRole('button', {
+  const orderConfirmButton = screen.getByRole('button', {
     name: /confirm order/i,
   });
-  userEvent.click(confirmOrderButton);
+  userEvent.click(orderConfirmButton);
+
+  // loading 要素が表示される
+  const loading = screen.getByText(/loading/i);
+  expect(loading).toBeInTheDocument();
 
   // 注文確認画面にて注文番号を確認する。
   // API コールが発生するため非同期的に待ち受ける
   const orderNumber = await screen.findByText(/your order number is /i);
   expect(orderNumber).toHaveTextContent('6235006122');
+
+  // loading 要素が非表示になっている
+  const notLoading = screen.queryByText(/loading/i);
+  expect(notLoading).not.toBeInTheDocument();
 
   // 注文確認画面にて注文するボタンをクリック
   const newOrderButton = screen.getByRole('button', {
